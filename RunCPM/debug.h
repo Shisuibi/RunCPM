@@ -293,9 +293,9 @@ static int read_hex8(uint8 *out) {
         if (ch == 8 || ch == 127) {
             if (count > 0) {
                 /* erase last hex digit visually (basic backspace handling) */
-                _putch('\b');
-                _putch(' ');
-                _putch('\b');
+                _putcon('\b');
+                _putcon(' ');
+                _putcon('\b');
                 v >>= 4;
                 --count;
             }
@@ -307,7 +307,7 @@ static int read_hex8(uint8 *out) {
             if (count < 2) {
                 v = (v << 4) | (unsigned int)(ch - '0');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -317,7 +317,7 @@ static int read_hex8(uint8 *out) {
             if (count < 2) {
                 v = (v << 4) | (unsigned int)(10 + ch - 'a');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -327,7 +327,7 @@ static int read_hex8(uint8 *out) {
             if (count < 2) {
                 v = (v << 4) | (unsigned int)(10 + ch - 'A');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -340,8 +340,8 @@ static int read_hex8(uint8 *out) {
     }
 
     /* move to next line visually */
-    _putch('\r');
-    _putch('\n');
+    _putcon('\r');
+    _putcon('\n');
 
     if (count == 0)
         return 0; /* no digits entered */
@@ -366,9 +366,9 @@ static int read_hex16(uint16 *out) {
         if (ch == 8 || ch == 127) {
             if (count > 0) {
                 /* erase last hex digit visually (basic backspace handling) */
-                _putch('\b');
-                _putch(' ');
-                _putch('\b');
+                _putcon('\b');
+                _putcon(' ');
+                _putcon('\b');
                 v >>= 4;
                 --count;
             }
@@ -380,7 +380,7 @@ static int read_hex16(uint16 *out) {
             if (count < 4) {
                 v = (v << 4) | (unsigned int)(ch - '0');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -390,7 +390,7 @@ static int read_hex16(uint16 *out) {
             if (count < 4) {
                 v = (v << 4) | (unsigned int)(10 + ch - 'a');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -400,7 +400,7 @@ static int read_hex16(uint16 *out) {
             if (count < 4) {
                 v = (v << 4) | (unsigned int)(10 + ch - 'A');
                 ++count;
-                _putch((char)ch);
+                _putcon((char)ch);
             }
             continue;
         }
@@ -413,8 +413,8 @@ static int read_hex16(uint16 *out) {
     }
 
     /* move to next line visually */
-    _putch('\r');
-    _putch('\n');
+    _putcon('\r');
+    _putcon('\n');
 
     if (count == 0)
         return 0; /* no digits entered */
@@ -575,14 +575,14 @@ uint8 Disasm(uint16 pos) {
     /* Print opcode bytes (up to len) */
     for (uint8 i = 0; i < len; ++i) {
         _puthex8(_RamRead((pos + i) & 0xffff));
-        _putch(' ');
+        _putcon(' ');
     }
 
     /* pad bytes area to fixed column (use 3 chars per byte, target 12 chars) */
     int bytes_width = (int)len * 3;
     int target = 12; /* enough for up to 4 bytes */
     for (int s = bytes_width; s < target; ++s)
-        _putch(' ');
+        _putcon(' ');
 
     /* Get mnemonic template (advances a temporary pos to operand start) */
     txt = GetMnemonicAt(&op_pos, &initial, (char *)&Cflag);
@@ -618,11 +618,11 @@ uint8 Disasm(uint16 pos) {
             break;
         }
         case '%':
-            _putch((char)Cflag);
+            _putcon((char)Cflag);
             ++txt;
             break;
         default:
-            _putch(*txt);
+            _putcon(*txt);
             ++txt;
         }
     }
@@ -694,7 +694,7 @@ static void z80_trace_dump(void) {
         /* pad to fixed column (target 16 chars) */
         int target = 16;
         for (int s = len; s < target; ++s)
-            _putch(' ');
+            _putcon(' ');
         _puts("BC:");
         _puthex16(e->BC);
         _puts(" DE:");
@@ -805,7 +805,7 @@ void Z80debug(void) {
         _puts("Command|? : ");
         ch = _getcon();
         if (ch > 21 && ch < 127)
-            _putch(ch);
+            _putcon(ch);
         switch (ch) {
         case 't':
             /* Trace to next instruction */
