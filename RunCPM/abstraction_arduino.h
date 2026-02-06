@@ -5,7 +5,7 @@
     #define printf(a, b) Serial.println(b)
 #endif
 
-#if defined ARDUINO_SAM_DUE || defined ADAFRUIT_GRAND_CENTRAL_M4
+#if defined ARDUINO_SAM_DUE || ARDUINO_GIGA || defined ADAFRUIT_GRAND_CENTRAL_M4
     #define HostOS 0x01
 #endif
 #if defined CORE_TEENSY
