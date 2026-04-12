@@ -502,6 +502,7 @@ uint32 _HardwareIn(const uint32 Port) {
 /* Console abstraction functions */
 /*===============================================================================*/
 
+/*----
 int _kbhit(void) {
     return (Serial.available());
 }
@@ -525,5 +526,6 @@ void _putch(uint8 ch) {
 void _clrscr(void) {
     Serial.println("\e[H\e[J");
 }
+----*/
 
 #endif

@@ -46,12 +46,14 @@ void setup(void) {
   pinMode(LED, OUTPUT);
   NeoPixWrite(LED, LOW);
   Serial.begin(SERIALSPD);
+/*----
   while (!Serial) {	// Wait until serial is connected
     NeoPixWrite(LED, HIGH^LEDinv);
     delay(sDELAY);
     NeoPixWrite(LED, LOW^LEDinv);
     delay(sDELAY);
   }
+----*/
 
 #ifdef DEBUGLOG
   _sys_deletefile((uint8 *)LogName);
