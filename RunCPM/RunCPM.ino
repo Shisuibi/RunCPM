@@ -9,7 +9,7 @@
 
 // Board definitions go into the "hardware" folder, if you use a board different than the
 // Arduino DUE, choose/change a file from there and reference that file here
-#include "hardware/arduino/due_sd_tf.h"
+#include "natsumi_gen4.h"
 
 // Delays for LED blinking
 #define sDELAY 50
@@ -18,7 +18,7 @@
 #include "abstraction_arduino.h"
 
 // Serial port speed
-#define SERIALSPD 9600
+#define SERIALSPD 115200
 
 // PUN: device configuration
 #ifdef USE_PUN
@@ -44,14 +44,16 @@ int lst_open = FALSE;
 
 void setup(void) {
   pinMode(LED, OUTPUT);
-  digitalWrite(LED, LOW);
+  NeoPixWrite(LED, LOW);
   Serial.begin(SERIALSPD);
+/*----
   while (!Serial) {	// Wait until serial is connected
-    digitalWrite(LED, HIGH^LEDinv);
+    NeoPixWrite(LED, HIGH^LEDinv);
     delay(sDELAY);
-    digitalWrite(LED, LOW^LEDinv);
+    NeoPixWrite(LED, LOW^LEDinv);
     delay(sDELAY);
   }
+----*/
 
 #ifdef DEBUGLOG
   _sys_deletefile((uint8 *)LogName);
@@ -143,12 +145,12 @@ void setup(void) {
 }
 
 void loop(void) {
-  digitalWrite(LED, HIGH^LEDinv);
+  NeoPixWrite(LED, HIGH^LEDinv);
   delay(DELAY);
-  digitalWrite(LED, LOW^LEDinv);
+  NeoPixWrite(LED, LOW^LEDinv);
   delay(DELAY);
-  digitalWrite(LED, HIGH^LEDinv);
+  NeoPixWrite(LED, HIGH^LEDinv);
   delay(DELAY);
-  digitalWrite(LED, LOW^LEDinv);
+  NeoPixWrite(LED, LOW^LEDinv);
   delay(DELAY * 4);
 }
