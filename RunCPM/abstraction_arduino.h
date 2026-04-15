@@ -502,7 +502,7 @@ uint32 _HardwareIn(const uint32 Port) {
 /* Console abstraction functions */
 /*===============================================================================*/
 
-/*----
+/*----	To support BLE UART
 int _kbhit(void) {
     return (Serial.available());
 }
