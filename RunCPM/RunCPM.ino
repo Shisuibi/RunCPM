@@ -46,7 +46,7 @@ void setup(void) {
   pinMode(LED, OUTPUT);
   NeoPixWrite(LED, LOW);
   Serial.begin(SERIALSPD);
-/*----
+/*----	To support BLE UART
   while (!Serial) {	// Wait until serial is connected
     NeoPixWrite(LED, HIGH^LEDinv);
     delay(sDELAY);
