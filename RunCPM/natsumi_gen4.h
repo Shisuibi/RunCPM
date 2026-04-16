@@ -241,12 +241,12 @@ static void TransMove(void) {
 #define		LedXiaoC6					15				//	XIAO ESP32C6
 #define		LedDevKitM					48				//	ESP32-S3-DevKitM
 //------------------------------------------------------------------------------//
-#define		SPIINIT		((iNeoPix == LedDevKitM)?12:19),\
-						((iNeoPix == LedDevKitM)?13:17),\
-						((iNeoPix == LedDevKitM)?11:20),\
-						((iNeoPix == LedDevKitM)? 9:18)		//	sck, miso, mosi, cs
+#define		SPIINIT		((iNeoPix == LedXiaoC6)?19:12),\
+						((iNeoPix == LedXiaoC6)?17:13),\
+						((iNeoPix == LedXiaoC6)?20:11),\
+						((iNeoPix == LedXiaoC6)?18: 9)	//	sck, miso, mosi, cs
 //------------------------------------------------------------------------------//
-#define		SDINIT		((iNeoPix == LedDevKitM)? 9:18), SD_SCK_MHZ(SDMHZ)
+#define		SDINIT		((iNeoPix == LedXiaoC6)?18: 9), SD_SCK_MHZ(SDMHZ)
 //==============================================================================//
 
 
