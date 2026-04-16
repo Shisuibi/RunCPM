@@ -264,7 +264,6 @@ static Uint08 esp32bdos(Uint16 iDmaAddr) {
 //------------------------------------------------------------------------------//
 static void NeoPixWrite(Uint08 iLedPin, Uint08 iLedBit) {
 	if(iNeoPix == LED) {
-		TransInit();
 		pinMode(1, INPUT_PULLDOWN);
 
 		if(digitalRead(1) == LOW) {
@@ -275,6 +274,7 @@ static void NeoPixWrite(Uint08 iLedPin, Uint08 iLedBit) {
 		} else iNeoPix = LedDevKitM;
 
 		pinMode(iNeoPix, OUTPUT);
+		TransInit();
 	}
 
 	if(iNeoPix == LedDevKitM) {
